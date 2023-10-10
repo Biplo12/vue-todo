@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "lucide-vue-next": "^0.284.0",
+    "timeago.js": "^4.0.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
