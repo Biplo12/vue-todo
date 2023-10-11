@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col gap-6 justify-center items-center w-80">
+  <div class="flex flex-col gap-6 justify-center items-center min-w-80">
     <h1 class="text-3xl font-bold">Todo List</h1>
-    <TaskCreate />
-    <TodoTasks :tasks="tasks" @delete-task="deleteTaskHandler" />
+    <TaskCreate @add-task="addTask" />
+    <TodoTasks :tasks="tasks" @delete-task="deleteTask" />
   </div>
 </template>
 
@@ -17,26 +17,21 @@ export default {
     TodoTasks
   },
   methods: {
-    deleteTaskHandler(id: number) {
+    deleteTask(id: number) {
       this.tasks = this.tasks.filter((item: ITodoTask) => item.id !== id)
+    },
+    addTask(title: string) {
+      this.tasks.unshift({
+        id: this.tasks.length + 1,
+        title,
+        reminder: false,
+        createdAt: new Date()
+      })
     }
   },
   data() {
     return {
-      tasks: [
-        {
-          id: 1,
-          title: 'Doctor Appointment',
-          reminder: true,
-          createdAt: new Date()
-        },
-        {
-          id: 2,
-          title: 'Spanish lesson',
-          reminder: false,
-          createdAt: new Date()
-        }
-      ]
+      tasks: [] as ITodoTask[]
     }
   }
 }
