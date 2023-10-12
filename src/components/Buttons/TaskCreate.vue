@@ -1,16 +1,18 @@
+form
 <template>
-  <div class="flex justify-center items-center gap-2 w-full">
-    <div
-      class="w-full flex justify-center items-center gap-2 border-black border rounded-md bg-white bg-opacity-5 py-1 px-3"
-    >
+  <div
+    class="flex justify-between w-72 items-center gap-2 border-black border rounded-md bg-white bg-opacity-5 py-1 px-3"
+  >
+    <form @submit.prevent="onAdd">
       <input
         class="w-full !outline-none bg-transparent"
         placeholder="Add a task..."
         @change="(e) => onTitleChange(e)"
         maxlength="32"
+        :value="title"
       />
-      <PlusCircle class="text-green-500 w-5 h-5 cursor-pointer" @click="onAdd" />
-    </div>
+    </form>
+    <PlusCircle class="text-ming w-5 h-5 cursor-pointer" @click="onAdd" />
   </div>
 </template>
 
@@ -26,11 +28,13 @@ export default {
     }
   },
   methods: {
-    onTitleChange(event: InputEvent) {
-      this.title = (event.target as HTMLInputElement).value
+    onTitleChange(e: Event) {
+      e.preventDefault()
+      this.title = (e.target as HTMLInputElement).value
     },
     onAdd() {
       this.$emit('add-task', this.title)
+      this.title = ''
     }
   },
   emits: ['add-task']

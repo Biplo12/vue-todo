@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sooty: '#131416'
+        sooty: '#131416',
+        ming: '#41B883'
       }
     }
   },

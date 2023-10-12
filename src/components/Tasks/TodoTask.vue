@@ -1,8 +1,9 @@
 <template>
   <div
-    :class="`p-4 border-l-2 w-full flex flex-col gap-2 bg-white bg-opacity-5 relative ${
-      task.reminder ? 'border-green-500' : 'border-white'
+    :class="`cursor-pointer p-4 border-l-2 w-full flex flex-col gap-2 bg-white bg-opacity-5 relative ${
+      task.reminder ? 'border-ming' : 'border-white'
     }`"
+    @dblclick="onEnableReminder(task.id)"
   >
     <h3 class="opacity-25 text-xs">{{ formattedCreatedAt }}</h3>
     <h1 class="text-xl font-bold">{{ task.title }}</h1>
@@ -39,6 +40,9 @@ export default {
   methods: {
     onDelete(id: number) {
       this.$emit('delete-task', id)
+    },
+    onEnableReminder(id: number) {
+      this.$emit('enable-reminder', id)
     }
   }
 }
